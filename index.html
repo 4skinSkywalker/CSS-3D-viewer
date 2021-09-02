@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="panels">
+    <div class="leftPanel">
+      <div class="editModalWrapper">
+        <input hidden id="editModalTrigger" type="checkbox">
+        <div class="editModalHead">
+          <span>{{ title }}</span>
+          <label for="editModalTrigger"></label>
+        </div>
+        <div class="editModalBody">
+          <label>Color</label>
+          <div class="colorInputWrapper">
+            <input type="color">
+            <input type="text" placeholder="#0000">
+          </div>
+          
+          <label>Width</label>
+          <div class="rangeInputWrapper">
+            <input type="range">
+            <input type="text" placeholder="em">
+          </div>
+          
+          <label>Height</label>
+          <div class="rangeInputWrapper">
+            <input type="range">
+            <input type="text" placeholder="em">
+          </div>
+          
+          <label>Depth</label>
+          <div class="rangeInputWrapper">
+            <input type="range">
+            <input type="text" placeholder="em">
+          </div>
+        </div>
+      </div>
+      <div class="sceneWrapper">
+        <!-- 3D scene -->
+        <div class="scene">
+          <div class="floor">
+            <div class="vertex topLeft"></div>
+            <div class="vertex topRight"></div>
+            <div class="vertex bottomLeft"></div>
+            <div class="vertex bottomRight"></div>
+            <div class="midfront"></div>
+            <div class="midleft"></div>
+          </div>
+        </div>
+      </div>
+      <!-- absolutely positioned controls -->
+      <div class="controls top">
+        <img class="controlsImg" src="https://github.com/4skinSkywalker/Assets-for-my-Codepen/blob/main/controls.png?raw=true">
+      </div>
+      <div class="controls left">
+        <button class="btnCircle zoomIn">+</button>
+        <button class="btnCircle zoomOut">-</button>
+        <button class="btnCircle changePersp perspective"></button>
+      </div>
+      <div class="controls bottom">
+        <label for="gridSize" class="textWhite">
+          Grid size
+          <select id="gridSize">
+            <option value="20">20 em</option>
+            <option value="30" selected>30 em</option>
+            <option value="40">40 em</option>
+            <option value="50">50 em</option>
+          </select>
+        </label>
+        <label for="snapSize" class="textWhite">
+          Snap size
+          <select id="snapSize">
+            <option value="0.125">0.125 em</option>
+            <option value="0.25">0.25 em</option>
+            <option value="0.5">0.5 em</option>
+            <option value="1" selected>1 em</option>
+          </select>
+        </label>
+      </div>
+      <!-- absolutely positioned sign -->
+      <a class="sign" href="https://www.linkedin.com/in/f3d3r1c07r0774/">@LinkedIn</a>
+    </div>
+    <div class="rightPanel">
+      <input id="rightPanelTrigger" hidden type="checkbox" checked="true">
+      <label for="rightPanelTrigger"></label>
+      <div class="rightPanelContainer">
+        <h2 class="rightPanelHeading">Add shape</h2>
+        <div class="rightPanelBody">
+          <div class="shapeCard" onclick="addCube()">
+            <img src="https://github.com/4skinSkywalker/Assets-for-my-Codepen/blob/main/iso-cube.png?raw=true">
+            <h3>Cube</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="main.js"></script>
+
+</body>
+</html>

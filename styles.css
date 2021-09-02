@@ -1,0 +1,381 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+*, *::after {
+  box-sizing: border-box;
+}
+
+*:focus {
+  outline: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto Condensed', sans-serif;
+  user-select: none;
+}
+
+.panels {
+  display: flex;
+  overflow: hidden;
+}
+
+.leftPanel {
+  position: relative;
+  flex-grow: 1;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.editModalWrapper {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  z-index: 999;
+  border-radius: 1em;
+  background-color: #ccce;
+  box-shadow: 0 5px 20px #0006;
+}
+
+.editModalHead {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+  border-top-left-radius: 1em;
+  border-top-right-radius: 1em;
+  background-color: #aaae;
+}
+
+.editModalBody {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  border-bottom-left-radius: 1em;
+  border-bottom-right-radius: 1em;
+}
+
+#editModalTrigger:not(:checked) ~ .editModalBody {
+  max-height: 1em;
+  padding: 0;
+  opacity: 0;
+  transition:
+    opacity .3s ease-in,
+    padding .3s ease-in .5s,
+    max-height .3s ease-in .5s;
+}
+
+#editModalTrigger:checked ~ .editModalBody {
+  max-height: 300px;
+  padding: 1em;
+  opacity: 1;
+  transition:
+    opacity .3s ease-out .5s,
+    padding .3s ease-out,
+    max-height .3s ease-out;
+}
+
+#editModalTrigger:not(:checked) ~ .editModalHead label[for="editModalTrigger"]::after {
+  content: "Open";
+}
+
+#editModalTrigger:checked ~ .editModalHead label[for="editModalTrigger"]::after {
+  content: "Close";
+}
+
+.colorInputWrapper,
+.rangeInputWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: .5em;
+}
+
+.colorInputWrapper input[type="text"],
+.rangeInputWrapper input[type="text"] {
+  text-align: right;
+  padding: 4px 8px;
+  border: 0;
+  border-radius: 1em;
+}
+
+.colorInputWrapper input[type="text"] {
+  width: 15ch;
+}
+
+.rangeInputWrapper input[type="text"] {
+  width: 6ch;
+}
+
+.rightPanel {
+  position: relative;
+  background-color: #ccc;
+  box-shadow: -5px 0 20px #0006;
+}
+
+label[for="rightPanelTrigger"] {
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  z-index: 999;
+  transform: rotateZ(-90deg) translateY(1.1em);
+  width: 4em;
+  height: 2em;
+  line-height: 2em;
+  text-align: center;
+  background: #ccc;
+  border-top-left-radius: 1em;
+  border-top-right-radius: 1em;
+}
+
+#rightPanelTrigger:not(:checked) + label[for="rightPanelTrigger"]::after {
+  content: "Open";
+}
+
+#rightPanelTrigger:checked + label[for="rightPanelTrigger"]::after {
+  content: "Close";
+}
+
+#rightPanelTrigger:not(:checked) ~ .rightPanelContainer {
+  max-width: 1em;
+  padding: 0;
+  opacity: 0;
+  transition:
+    opacity .3s ease-in,
+    padding .3s ease-in .4s,
+    max-width .3s ease-in .4s;
+}
+
+#rightPanelTrigger:checked ~ .rightPanelContainer {
+  max-width: 500px;
+  padding: 1em;
+  opacity: 1;
+  transition:
+    opacity .3s ease-out .4s,
+    padding .3s ease-out,
+    max-width .3s ease-out;
+}
+
+.rightPanelBody {
+  display: grid;
+  grid-template-columns: repeat(2, 150px);
+  justify-content: center;
+  gap: 2.5vw;
+}
+
+.rightPanelHeading {
+  text-align: center;
+  margin-bottom: 2em;
+}
+
+.shapeCard {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 150px;
+  height: 100px;
+  border-radius: 1em;
+  background: #fffe;
+}
+
+.shapeCard img {
+  position: absolute;
+  height: 96px;
+  top: -32px;
+}
+
+.shapeCard h3 {
+  position: absolute;
+  bottom: 8px;
+  margin: 0;
+}
+
+.sceneWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.scene {
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.floor {
+  position: absolute;
+  transform-style: preserve-3d;
+  transform:
+    translate(-50%, -49.99%)
+    rotateX(90deg);
+  background-image:
+    repeating-linear-gradient(
+      #ccc 0, #ccc 1px,
+      #0000 .5px, #0000 calc(50% - 1px),
+      #ccc calc(50% - 1px), #ccc calc(50% + 1px),
+      #0000 calc(50% + 1px), #0000 calc(100% - 1px),
+      #ccc calc(100% - 1px)
+    ),
+    repeating-linear-gradient(
+      90deg,
+      #ccc 0, #ccc 1px,
+      #0000 1px, #0000 calc(50% - 1px),
+      #ccc calc(50% - 1px), #ccc calc(50% + 1px),
+      #0000 calc(50% + 1px), #0000 calc(100% - 1px),
+      #ccc calc(100% - 1px)
+    );
+  background-size: 1em 1em;
+  background-position: center;
+  outline: 2px solid #f008;
+}
+
+.midfront, .midleft {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: #f008;
+}
+
+.midfront {
+  top: 50%;
+  transform: translateY(-50%) rotateX(90deg);
+}
+
+.midleft {
+  top: 50%;
+  transform: rotateZ(90deg) rotateX(90deg);
+}
+
+.vertex {
+  position: absolute;
+}
+
+.topLeft {
+  top: 0;
+  left: 0;
+}
+
+.topRight {
+  top: 0;
+  right: 0;
+}
+
+.bottomLeft {
+  bottom: 0;
+  left: 0;
+}
+
+.bottomRight {
+  bottom: 0;
+  right: 0;
+}
+
+.model.selected .face {
+  opacity: 0.5;
+  box-shadow: inset 0 0 1px 1px #000f;
+}
+
+.face {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset 0 0 1px 1px #0006;
+  user-select: none;
+}
+
+.rotationCube .face:hover {
+  background-color: #888e!important;
+  transition: background-color .3s ease-out;
+}
+
+.controls {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+/*   border: 1px solid; */
+}
+
+.controls.top {
+  top: 3em;
+  width: 100%;
+  height: 64px;
+}
+
+.controlsImg {
+  height: 96px;
+}
+
+.controls.left {
+  flex-direction: column;
+  top: 0;
+  left: 3em;
+  width: 64px;
+  height: 100%;
+}
+
+.controls.bottom {
+  bottom: 3em;
+  width: 100%;
+  height: 64px;
+}
+
+button {
+  border: 0;
+  background-color: #fffe;
+}
+
+.btnCircle {
+  padding: 0;
+  font-size: 24px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+.textWhite {
+  color: #fff;
+}
+
+select {
+  border: 0;
+  padding: 2px 4px;
+  border-radius: 1em;
+}
+
+.shapeCard, button, select {
+  box-shadow: 0 10px 20px #0008;
+  transition:
+    transform .1s ease-out,
+    box-shadow .1s ease-out;
+}
+
+.shapeCard:hover, button:hover, select:hover {
+  transform: scale(0.98);
+  box-shadow: 0 2px 5px #000c;
+}
+
+.perspective {
+  background-size: 65%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(https://github.com/4skinSkywalker/Assets-for-my-Codepen/blob/main/persp-cube.png?raw=true);
+}
+
+.isometric {
+  background-size: 65%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(https://github.com/4skinSkywalker/Assets-for-my-Codepen/blob/main/iso-cube.png?raw=true);
+}
+
+.sign {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  font-size: 24px;
+  color: #fff;
+  text-decoration: none;
+}
